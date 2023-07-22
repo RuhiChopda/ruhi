@@ -1,0 +1,60 @@
+def show_menu():
+    print("\n--- To-Do List Menu ---")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Remove Task")
+    print("4. Exit")
+
+
+def add_task(tasks_list):
+    task = input("Enter the task: ")
+    tasks_list.append(task)
+    print(f"Task '{task}' added to the list.")
+
+
+def view_tasks(tasks_list):
+    if not tasks_list:
+        print("No tasks found.")
+    else:
+        print("\n--- Tasks ---")
+        for i, task in enumerate(tasks_list, start=1):
+            print(f"{i}. {task}")
+
+
+def remove_task(tasks_list):
+    view_tasks(tasks_list)
+    if not tasks_list:
+        return
+
+    try:
+        task_index = int(input("Enter the task number to remove: "))
+        if 1 <= task_index <= len(tasks_list):
+            removed_task = tasks_list.pop(task_index - 1)
+            print(f"Task '{removed_task}' removed from the list.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Invalid input. Please enter a valid task number.")
+
+
+def main():
+    tasks_list = []
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1/2/3/4): ")
+
+        if choice == "1":
+            add_task(tasks_list)
+        elif choice == "2":
+            view_tasks(tasks_list)
+        elif choice == "3":
+            remove_task(tasks_list)
+        elif choice == "4":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if _name_ == "_main_":
+    main()
